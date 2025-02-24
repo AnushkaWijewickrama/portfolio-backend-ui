@@ -23,7 +23,7 @@
             <tr *ngFor="let project of projects | paginate: { itemsPerPage: 3, currentPage: page }">
                 <td class="px-4 py-2">{{ project.title }}</td>
                 <td class="px-4 py-2">{{ project.description }}</td>
-                <td class="px-4 py-2"><img [src]="project?.imagePath" width="100" height="100" srcset=""></td>
+                <td class="px-4 py-2"><img [src]="project?.imagePath[0]" width="100" height="100" srcset=""></td>
                 <td class="px-4 py-2">{{ project.projectYear }}</td>
                 <td class="px-4 py-2">{{ project.projectType }}</td>
                 <td class="px-4 py-2 space-x-2">

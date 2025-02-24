@@ -103,7 +103,7 @@ export class CreateProjectComponent implements OnInit {
       this.imageData = null;
     }
     else {
-      console.log(this.form.value.model)
+
       this.projectService.updateSingleData(this.form.value);
       this.form.reset();
       this.imageData = null;
