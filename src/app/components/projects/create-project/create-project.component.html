@@ -1,0 +1,69 @@
+<h1 class="text-2xl font-bold mb-4">Create Project</h1>
+<hr class="mb-6" />
+<form [formGroup]="form" class="space-y-4">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-gray-700">Title</label>
+      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="title" type="text"
+        placeholder="Enter Project Title..." />
+    </div>
+    <div>
+      <label class="block text-gray-700">Description</label>
+      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="description" type="text"
+        placeholder="Enter Description..." />
+    </div>
+
+    <div>
+      <div formArrayName="image" class="mt-4 mb-4">
+        <div *ngFor="let img of image.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="mb-4 flex items-center justify-between gap-4">
+              <div>
+                <input class="file-input file-input-bordered w-full" (change)="onFileSelect($event, i)" type="file"
+                  accept=".png, .jpg, .jpeg" />
+              </div>
+              <div>
+                <img [src]="img.value.imagePreview" [alt]="img.value.image" class="w-12 h-12 object-cover rounded" />
+              </div>
+              <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded shadow-md"
+                (click)="removeimage(i)">
+                Remove
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded shadow-md"
+          (click)="addImage()">
+          Add Image
+        </button>
+      </div>
+
+
+    </div>
+
+    <div>
+      <label class="block text-gray-700">Long Description</label>
+      <angular-editor [placeholder]="'Long Description here...'" formControlName="longDescription"></angular-editor>
+
+    </div>
+    <div>
+      <label class="block text-gray-700">Project Year</label>
+      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="projectYear" type="text"
+        placeholder="Enter Project Year..." />
+    </div>
+    <div>
+      <label class="block text-gray-700">Project Type</label>
+      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="projectType" type="text"
+        placeholder="Enter Project Type..." />
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <button (click)="onSubmit()" [disabled]="!form.valid"
+      class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Create
+      Project</button>
+  </div>
+</form>

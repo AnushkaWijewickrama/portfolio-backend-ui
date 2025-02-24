@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://www.kind-bouman.222-165-190-229.plesk.page",
+    "secure": false
+  }
+}

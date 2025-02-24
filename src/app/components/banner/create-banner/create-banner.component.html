@@ -1,0 +1,44 @@
+<h1>Create Banner</h1>
+<hr />
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-12">
+        <input class="form-control mb-4" formControlName="title" type="text" placeholder="Enter title..." />
+      </div>
+      <div class="col-lg-5 col-12">
+        <input class="form-control" formControlName="description" type="text" placeholder="Enter Description..." />
+      </div>
+      <div class="col-lg-5 col-12 mb-4" *ngIf="!form.value.isVideo">
+        <input class=" form-control" (change)="onFileSelect($event)" type="file" />
+        <div *ngIf="imageData" class="col-lg-5 col-12 mt-4">
+          <img [src]="imageData" [alt]="form.value.name" width="200" height="200" />
+        </div>
+      </div>
+      <div class="col-lg-5 col-12 mb-4">
+        <div class="d-flex " style="align-items: center;">
+          <label style="margin-right: 10px;">Is Video</label>
+          <input formControlName="isVideo" type="checkbox" />
+
+        </div>
+
+      </div>
+      <div class="col-lg-5 col-12" *ngIf="form.value.isVideo">
+        <input class="form-control mb-4" formControlName="videoPath" type="text"
+          placeholder="Enter Youtube Video link..." />
+        <label>example : https://www.youtube.com/embed/sMwPj3mSgVk?autoplay=1&mute=1&si=TpfIHWg48KrW_QJn</label>
+      </div>
+
+
+      <!-- <div class="col-lg-5 col-12">
+        <select formControlName="brand" multiple class="form-control">
+          <option *ngFor="let item of brandList" [value]="item">{{item.title}}</option>
+        </select>
+      </div> -->
+      <div class="mt-4">
+        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Create Banner</button>
+      </div>
+    </div>
+
+  </div>
+</form>
