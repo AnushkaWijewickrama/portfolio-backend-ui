@@ -75,35 +75,20 @@ export class ProjectService {
   }
 
   updateSingleData(data): void {
+
     const projectData = new FormData();
-    const deletedImages = data.deletedImages || []; // Add a field for deleted images
-    const replacedImages = data.replacedImages || []; // Add a field for replaced images
 
-    // Check if the image has been updated
-    if (data.image && data.image.length > 0) {
-      // Clear the existing image and append the new one
-      data.image.forEach((imageObj: any) => {
-        projectData.append("image", imageObj.image);
-      });
-    } else {
-      // If image is not updated, append the existing image path
-      projectData.append("imagePath", data.imagePath);
-    }
-
-    // Include deleted images and replaced images
-    if (deletedImages.length > 0) {
-      projectData.append("deletedImages", JSON.stringify(deletedImages));
-    }
-    if (replacedImages.length > 0) {
-      projectData.append("replacedImages", JSON.stringify(replacedImages));
-    }
-
-    // Append other project data
     projectData.append("title", data.title);
     projectData.append("description", data.description);
     projectData.append("longDescription", data.longDescription);
     projectData.append("projectType", data.projectType);
     projectData.append("projectYear", data.projectYear);
+    if (data.image) {
+      Object.keys(data.image).forEach(element => {
+        console.log(data.image[element].image)
+        projectData.append("image", data.image[element].image);
+      });
+    }
 
     this.http.put<{ Project: Project }>(`${this.projectUrl}/${data.id}`, projectData).subscribe({
       next: (response: any) => {

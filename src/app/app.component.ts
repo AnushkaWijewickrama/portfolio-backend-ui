@@ -1,22 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { AsyncPipe, NgIf } from '@angular/common';
-import { AuthService } from './util/auth.service';
-import { BehaviorSubject, filter, Subject, Subscription } from 'rxjs';
+import { filter, Subject, Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
   imports: [RouterOutlet, SidebarComponent, NgIf]
 })
 export class AppComponent implements OnInit, OnDestroy {
   isLoginPage = false;
   private routerSubscription!: Subscription;
-  private destroy$ = new Subject<void>(); // ✅ Added to handle unsubscriptions
+  private destroy$ = new Subject<void>();
 
   constructor(private router: Router) { }
 
@@ -32,8 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.destroy$.next(); // ✅ Triggers unsubscription
-    this.destroy$.complete(); // ✅ Cleans up resources
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

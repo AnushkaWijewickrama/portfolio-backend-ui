@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-auth',
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
+  templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
   form!: FormGroup;

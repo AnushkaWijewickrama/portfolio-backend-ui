@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,4 +9,11 @@ import { RouterLink } from '@angular/router';
 })
 export class SidebarComponent {
 
+  constructor(private router: Router) { }
+  setLogOut(): void {
+    if (localStorage.getItem('authenticationToken')) {
+      localStorage.removeItem('authenticationToken')
+      this.router.navigate(['/login'])
+    }
+  }
 }

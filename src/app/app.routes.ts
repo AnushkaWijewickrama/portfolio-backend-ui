@@ -5,9 +5,6 @@ import { LoginGuard } from './util/loginguard.guard';
 import { AllProjectsComponent } from './components/projects/project-list/all-projects.component';
 import { CreateProjectComponent } from './components/projects/create-project/create-project.component';
 
-
-
-
 export const routes: Routes = [
 
     {
