@@ -3,13 +3,14 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { filter, Subject, Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, SidebarComponent, NgIf]
+  imports: [RouterOutlet, SidebarComponent, NgIf, NgxSpinnerModule]
 })
 export class AppComponent implements OnInit, OnDestroy {
   isLoginPage = false;

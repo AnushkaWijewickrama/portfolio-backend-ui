@@ -22,7 +22,7 @@
             </div>
             <!-- Submit Button -->
             <div>
-              <button (click)="onSubmit()"
+              <button (click)="onSubmit()" [disabled]="!form.valid"
                 class="w-full bg-blue-700 text-white py-2 rounded-md hover:bg-blue-800 active:scale-95 transition-all duration-200">
                 Sign In
               </button>

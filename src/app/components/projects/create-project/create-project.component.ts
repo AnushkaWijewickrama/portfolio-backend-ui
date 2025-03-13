@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule, FormBuilder, FormArray } from "@angular/forms";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
-import { HttpClientModule, HttpResponse } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../../../services/project.service";
@@ -13,7 +13,7 @@ import { AngularEditorModule } from "@kolkov/angular-editor";
   selector: "app-create-product",
   templateUrl: "./create-project.component.html",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgIf, NgFor, HttpClientModule, MatButtonModule, AngularEditorModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgFor, HttpClientModule, MatButtonModule, AngularEditorModule, NgIf]
 })
 export class CreateProjectComponent implements OnInit {
   form!: FormGroup;

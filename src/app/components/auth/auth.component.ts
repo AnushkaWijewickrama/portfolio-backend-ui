@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   form!: FormGroup;
+
   constructor(private authService: AuthService, private route: Router) { }
+
   ngOnInit(): void {
     this.form = new FormGroup({
       username: new FormControl("", Validators.required),

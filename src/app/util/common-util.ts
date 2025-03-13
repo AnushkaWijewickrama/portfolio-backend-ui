@@ -1,3 +1,3 @@
 
 
-export const SERVER_API_URL: string = 'http://localhost:3000';
+export const SERVER_API_URL: string = 'https://portfolio-backend-one-omega.vercel.app';
