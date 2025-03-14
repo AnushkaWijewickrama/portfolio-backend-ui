@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule, FormBuilder, FormArray } from "@angular/forms";
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule, FormBuilder, FormArray, AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { CommonModule, NgFor, NgIf } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { MatButtonModule } from "@angular/material/button";
@@ -30,7 +30,7 @@ export class CreateProjectComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      image: this.fb.array([]),
+      image: this.fb.array([this.newImage()], imageArrayValidator()),
       longDescription: new FormControl(null, Validators.required),
       projectType: new FormControl(null, Validators.required),
       projectYear: new FormControl(null, Validators.required),
@@ -67,8 +67,11 @@ export class CreateProjectComponent implements OnInit {
   }
   newImage(imagePreview?: string): FormGroup {
     return this.fb.group({
-      image: imagePreview || 'Add Project Image',
-      imagePreview: imagePreview || '/assets/imgepre.jpg'
+      image: [imagePreview || 'Add Project Image', Validators.required],
+      imagePreview: [
+        imagePreview || '/assets/imgepre.jpg',
+        [Validators.required, imagePreviewValidator()] // Apply the custom validator here
+      ]
     })
   }
   addImage() {
@@ -110,4 +113,21 @@ export class CreateProjectComponent implements OnInit {
     }
 
   }
+}
+export function imageArrayValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const formArray = control as FormArray;
+    if (formArray && formArray.length === 0) {
+      return { noImageAdded: true };
+    }
+    return null;
+  };
+}
+export function imagePreviewValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control.value === '/assets/imgepre.jpg') {
+      return { invalidImagePreview: true }; // Return error if it's the default image
+    }
+    return null;
+  };
 }
