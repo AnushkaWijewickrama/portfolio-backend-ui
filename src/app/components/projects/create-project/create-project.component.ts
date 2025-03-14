@@ -30,7 +30,7 @@ export class CreateProjectComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      image: this.fb.array([this.newImage()], imageArrayValidator()),
+      image: this.fb.array([], imageArrayValidator()),
       longDescription: new FormControl(null, Validators.required),
       projectType: new FormControl(null, Validators.required),
       projectYear: new FormControl(null, Validators.required),
