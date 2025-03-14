@@ -67,8 +67,8 @@ export class CreateProjectComponent implements OnInit {
   }
   newImage(imagePreview?: string): FormGroup {
     return this.fb.group({
-      image: imagePreview,
-      imagePreview: imagePreview
+      image: imagePreview || 'Add Project Image',
+      imagePreview: imagePreview || '/assets/imgepre.jpg'
     })
   }
   addImage() {

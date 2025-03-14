@@ -10,8 +10,8 @@
     </div>
     <div>
       <label class="block text-gray-700">Description</label>
-      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="description" type="text"
-        placeholder="Enter Description..." />
+      <textarea class="border border-gray-300 rounded-lg p-2 w-full" formControlName="description"
+        placeholder="Enter Description..."></textarea>
     </div>
 
     <div>
@@ -52,19 +52,25 @@
     </div>
     <div>
       <label class="block text-gray-700">Project Year</label>
-      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="projectYear" type="text"
-        placeholder="Enter Project Year..." />
+      <input class="border border-gray-300 rounded-lg p-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        formControlName="projectYear" type="date" placeholder="Select Project Year" />
     </div>
+
     <div>
       <label class="block text-gray-700">Project Type</label>
-      <input class="border border-gray-300 rounded-lg p-2 w-full" formControlName="projectType" type="text"
-        placeholder="Enter Project Type..." />
+      <select class="border border-gray-300 rounded-lg p-2 w-full" formControlName="projectType">
+        <option value="individual">Individual</option>
+        <option value="group">Group</option>
+      </select>
     </div>
+
   </div>
 
   <div class="mt-4">
     <button (click)="onSubmit()" [disabled]="!form.valid"
-      class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Create
-      Project</button>
+      class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
+      Create Project
+    </button>
   </div>
+
 </form>
