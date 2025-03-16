@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule, FormBuilder, AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { CommonModule, NgIf } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute } from "@angular/router";
-import { ProjectService } from "../../../services/project.service";
 import { Project } from "../../../models/project";
 import { AngularEditorModule } from "@kolkov/angular-editor";
+import { StackService } from "../../../services/stack.service";
 
 
 @Component({
@@ -23,7 +23,7 @@ export class CreateStackComponent implements OnInit {
   bannerSubscription: any;
   isedit: boolean = false;
 
-  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute) { }
+  constructor(private stackService: StackService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -35,7 +35,7 @@ export class CreateStackComponent implements OnInit {
     this.activatedRoute.params.subscribe((res: any) => {
       this.isedit = res['id'] ? true : false
       if (this.isedit) {
-        this.projectService.getSingleData(res.id).subscribe({
+        this.stackService.getSingleData(res.id).subscribe({
           next: (res) => {
             let x = res
             this.form.get('title')?.patchValue(x.title)
@@ -74,13 +74,13 @@ export class CreateStackComponent implements OnInit {
 
   onSubmit() {
     if (!this.isedit) {
-      this.projectService.addProject(this.form.value);
+      this.stackService.addstack(this.form.value);
       this.form.reset();
       this.imageData = null;
     }
     else {
 
-      this.projectService.updateSingleData(this.form.value);
+      this.stackService.updateSingleData(this.form.value);
       this.form.reset();
       this.imageData = null;
     }
