@@ -1,0 +1,42 @@
+<!-- Add stack Button -->
+<a href="/addStack" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Stack</a>
+
+<!-- stack Section Header -->
+<h1 class="text-2xl font-semibold mb-4 mt-4">Stacks</h1>
+
+
+<!-- Table -->
+<div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full table-auto">
+        <!-- Table Header -->
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 text-left font-semibold">Title</th>
+                <th class="px-4 py-2 text-left font-semibold">Description</th>
+                <th class="px-4 py-2 text-left font-semibold">Image</th>
+                <th class="px-4 py-2 text-left font-semibold">Action</th>
+            </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+            <tr *ngFor="let stack of stacks | paginate: { itemsPerPage: 3, currentPage: page }">
+                <td class="px-4 py-2">{{ stack.title }}</td>
+                <td class="px-4 py-2">{{ stack.description }}</td>
+                <td class="px-4 py-2"><img [src]="stack?.imagePath" width="100" height="100" srcset=""></td>
+                <td class="px-4 py-2 space-x-2">
+                    <!-- Edit Button -->
+                    <a [routerLink]="['/editstack', stack._id]"
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Edit</a>
+
+                    <!-- Delete Button -->
+                    <button (click)="deleteData(stack._id)"
+                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Pagination Controls -->
+<div class="flex justify-center mt-4">
+    <pagination-controls (pageChange)="page = $event" class="flex space-x-2"></pagination-controls>
+</div>
