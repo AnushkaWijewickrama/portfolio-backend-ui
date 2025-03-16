@@ -41,7 +41,7 @@ export class CreateStackComponent implements OnInit {
             this.form.get('title')?.patchValue(x.title)
             this.form.get('description')?.patchValue(x.description)
             this.form.get('id')?.patchValue(x._id)
-            this.form.get('image')?.patchValue(x.image)
+            this.form.get('image')?.patchValue(x.imagePath[0])
 
           },
           error: (error) => {
