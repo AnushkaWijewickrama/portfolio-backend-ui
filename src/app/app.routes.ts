@@ -48,7 +48,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'editStack/:id',
+        path: 'editstack/:id',
         component: CreateStackComponent,
         canActivate: [AuthGuard]
     },
