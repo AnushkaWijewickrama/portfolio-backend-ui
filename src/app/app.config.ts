@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { InterceptorService } from './util/loader.interceptor';
 import { AuthInterceptor } from './util/auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     useClass: AuthInterceptor,
     multi: true
   },
+    CookieService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,

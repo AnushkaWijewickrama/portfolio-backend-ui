@@ -4,6 +4,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { filter, Subject, Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -12,14 +13,20 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   templateUrl: './app.component.html',
   imports: [RouterOutlet, SidebarComponent, NgIf, NgxSpinnerModule]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   isLoginPage = false;
   private routerSubscription!: Subscription;
-  private destroy$ = new Subject<void>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    setInterval(() => {
+      if (!this.authService.getToken()) {
+        this.router.navigate(['/login']);
+      }
+      console.log('first')
+    }, 5000); // Check every 5 seconds
+
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -30,9 +37,4 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
 }

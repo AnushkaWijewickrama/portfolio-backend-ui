@@ -1,5 +1,5 @@
 {
-  "name": "kase-backendui",
+  "name": "portfoliositebackendui",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -24,6 +24,7 @@
     "@ngneat/until-destroy": "^10.0.0",
     "angular-17-custom-text-editor": "^1.0.3",
     "bootstrap": "^5.3.3",
+    "ngx-cookie-service": "^19.1.2",
     "ngx-extended-pdf-viewer": "^20.0.1",
     "ngx-pagination": "^6.0.3",
     "ngx-quill": "^25.1.1",
