@@ -19,12 +19,13 @@ export class AuthService {
   }
   setToken(token: string): void {
     this.cookieService.set('jwtToken', token, {
-      expires: 10 * 60 * 1000, // Expires in 10min day
+      expires: 10 / (24 * 60), // 10 minutes
       path: '/',
       secure: true, // Use only for HTTPS
       sameSite: 'Strict'
     });
   }
+
 
   getToken(): string {
     return this.cookieService.get('jwtToken');
@@ -32,6 +33,10 @@ export class AuthService {
 
   deleteToken(): void {
     this.cookieService.delete('jwtToken');
+  }
+  checkTokenExpiration(): boolean {
+    // Here you can check the token or any other logic to check token validity
+    return this.getToken() !== null;
   }
 
 }

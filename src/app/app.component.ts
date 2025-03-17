@@ -21,10 +21,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
-      if (!this.authService.getToken()) {
+      if (!this.authService.checkTokenExpiration()) {
         this.router.navigate(['/login']);
       }
-      console.log('first')
+      console.log(this.authService.getToken());
     }, 5000); // Check every 5 seconds
 
     this.routerSubscription = this.router.events.pipe(

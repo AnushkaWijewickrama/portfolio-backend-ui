@@ -11,6 +11,10 @@ import { AuthService } from '../../services/auth.service';
 export class SidebarComponent {
 
   constructor(private router: Router, private authService: AuthService) { }
+
+  ngOnInit() {
+
+  }
   setLogOut(): void {
     if (this.authService.getToken()) {
       this.authService.deleteToken();
