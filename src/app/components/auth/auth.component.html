@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
+<div class="flex justify-center items-center min-h-screen">
   <div class="w-64 h-96 perspective">
     <div
       class="relative w-full h-full transform-style-3d transform translate-z-[-100px] transition-transform duration-500 ease-in">
@@ -8,17 +8,13 @@
           <form [formGroup]="form" class="mt-6 space-y-6">
             <!-- Username Field -->
             <div class="relative">
-              <input type="text" name="username" formControlName="username" placeholder=" "
+              <input type="text" name="username" formControlName="username" placeholder="Username"
                 class="w-full border-b-2 border-teal-500 bg-transparent text-gray-700 focus:outline-none focus:border-blue-600" />
-              <label
-                class="absolute left-0 top-1/2 transform -translate-y-1/2 text-sm text-gray-500 transition-all duration-200 pointer-events-none">Username</label>
             </div>
             <!-- Password Field -->
             <div class="relative">
-              <input type="password" name="password" formControlName="password" placeholder=" "
+              <input type="password" name="password" formControlName="password" placeholder="Password"
                 class="w-full border-b-2 border-teal-500 bg-transparent text-gray-700 focus:outline-none focus:border-blue-600" />
-              <label
-                class="absolute left-0 top-1/2 transform -translate-y-1/2 text-sm text-gray-500 transition-all duration-200 pointer-events-none">Password</label>
             </div>
             <!-- Submit Button -->
             <div>

@@ -25,7 +25,6 @@ export class AuthComponent implements OnInit {
   onSubmit(): void {
     this.authService.create(this.form?.value)
       .subscribe((result) => {
-        console.log(result?.body?.token)
         this.authService.setToken(result?.body?.token)
         if (this.route.url !== '/') {
           this.route.navigate(['/']); // Only navigate if necessary
