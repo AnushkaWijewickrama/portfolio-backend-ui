@@ -42,6 +42,8 @@ export class ProjectService {
     project.append("projectYear", projectData.projectYear);
     project.append("projectType", projectData.projectType);
     project.append("projectLink", projectData.projectLink);
+    project.append("techStack", projectData.techStack);
+    console.log(projectData)
     Object.keys(projectData.image).forEach(element => {
       project.append("image", projectData.image[element].image);
     });
@@ -85,9 +87,10 @@ export class ProjectService {
     projectData.append("longDescription", data.longDescription);
     projectData.append("projectType", data.projectType);
     projectData.append("projectYear", data.projectYear);
+    projectData.append("techStack", data.techStack);
+
     if (data.image) {
       Object.keys(data.image).forEach(element => {
-        console.log(data.image[element].image)
         projectData.append("image", data.image[element].image);
       });
     }

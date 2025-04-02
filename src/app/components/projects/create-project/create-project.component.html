@@ -18,6 +18,12 @@
       <textarea class="border border-gray-300 rounded-lg p-2 w-full" formControlName="description"
         placeholder="Enter Description..."></textarea>
     </div>
+    <div>
+      <label class="block text-gray-700">Project Stack</label>
+      <select class="border border-gray-300 rounded-lg p-2 w-full" formControlName="techStack" multiple>
+        <option *ngFor="let stack of stacks" [value]="stack.title">{{stack.title}}</option>
+      </select>
+    </div>
 
     <div>
       <div formArrayName="image" class="mt-4 mb-4">

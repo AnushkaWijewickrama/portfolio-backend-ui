@@ -7,6 +7,9 @@ import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../../../services/project.service";
 import { Project } from "../../../models/project";
 import { AngularEditorModule } from "@kolkov/angular-editor";
+import { StackService } from "../../../services/stack.service";
+import { Stack } from "../../../models/stack";
+import { Subscription } from "rxjs";
 
 
 @Component({
@@ -19,24 +22,25 @@ export class CreateProjectComponent implements OnInit {
   form!: FormGroup;
   product!: Project;
   imageData!: any;
-  latest: any = ["YES", "NO"];
-  modelList: any = [];
-  bannerSubscription: any;
   isedit: boolean = false;
+  stacks: Stack[] = [];
+  private stackSubscription!: Subscription;
 
-  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private stackService: StackService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       image: this.fb.array([], imageArrayValidator()),
+      techStack: new FormControl(null, Validators.required),
       longDescription: new FormControl(null, Validators.required),
       projectType: new FormControl(null, Validators.required),
       projectYear: new FormControl(null, Validators.required),
       projectLink: new FormControl(null, Validators.required),
       id: new FormControl(null)
     });
+
     this.activatedRoute.params.subscribe((res: any) => {
       this.isedit = res['id'] ? true : false
       if (this.isedit) {
@@ -50,14 +54,40 @@ export class CreateProjectComponent implements OnInit {
             this.form.get('id')?.patchValue(x._id)
             this.form.get('projectType')?.patchValue(x.projectType)
             this.form.get('projectLink')?.patchValue(x.projectLink)
+
+            this.stackService.getstack();
+            this.stackSubscription = this.stackService
+              .getstackStream()
+              .subscribe((stack: Stack[]) => {
+                this.stacks = stack;
+                const firstArray = x?.techStack
+                const techArray = firstArray[0].split(',');
+                const secondArray = stack
+                const secondArrayTitles = secondArray.map(item => item.title);
+                const commonValues = techArray.filter(value => secondArrayTitles.includes(value));
+                this.form.get('techStack')?.patchValue(commonValues)
+
+              });
+
             x?.imagePath?.forEach((image: string) => {
               this.image.push(this.newImage(image));
             })
           },
+
           error: (error) => {
             console.error('Error fetching project data', error);
           }
         });
+      }
+      else {
+        this.stackService.getstack();
+        this.stackSubscription = this.stackService
+          .getstackStream()
+          .subscribe((stack: Stack[]) => {
+            this.stacks = stack;
+            console.log(this.stacks)
+          });
+
       }
 
     })
@@ -106,9 +136,10 @@ export class CreateProjectComponent implements OnInit {
       this.projectService.addProject(this.form.value);
       this.form.reset();
       this.imageData = null;
+
+
     }
     else {
-
       this.projectService.updateSingleData(this.form.value);
       this.form.reset();
       this.imageData = null;
