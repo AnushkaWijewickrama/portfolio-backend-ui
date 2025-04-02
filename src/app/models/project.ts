@@ -6,5 +6,6 @@ export interface Project {
   longDescription: string
   projectYear: string
   projectType: string
-  imagePath?: any
+  imagePath?: any,
+  projectLink: string
 }

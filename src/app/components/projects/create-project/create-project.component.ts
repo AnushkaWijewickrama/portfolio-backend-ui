@@ -34,6 +34,7 @@ export class CreateProjectComponent implements OnInit {
       longDescription: new FormControl(null, Validators.required),
       projectType: new FormControl(null, Validators.required),
       projectYear: new FormControl(null, Validators.required),
+      projectLink: new FormControl(null, Validators.required),
       id: new FormControl(null)
     });
     this.activatedRoute.params.subscribe((res: any) => {
@@ -48,6 +49,7 @@ export class CreateProjectComponent implements OnInit {
             this.form.get('projectYear')?.patchValue(x.projectYear)
             this.form.get('id')?.patchValue(x._id)
             this.form.get('projectType')?.patchValue(x.projectType)
+            this.form.get('projectLink')?.patchValue(x.projectLink)
             x?.imagePath?.forEach((image: string) => {
               this.image.push(this.newImage(image));
             })
