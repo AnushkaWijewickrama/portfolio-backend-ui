@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
-import { CommonModule, NgFor } from "@angular/common";
+import { CommonModule, NgFor, SlicePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HttpResponse } from "@angular/common/http";
 import { ActivatedRoute, RouterLink } from "@angular/router";
@@ -12,7 +12,7 @@ import { NgxPaginationModule } from "ngx-pagination";
   selector: "app-all-product",
   templateUrl: "./all-project.component.html",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgFor, HttpClientModule, RouterLink, NgxPaginationModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgFor, HttpClientModule, RouterLink, NgxPaginationModule, SlicePipe]
 })
 export class AllProjectsComponent implements OnInit, OnDestroy {
   projects: Project[] = [];
