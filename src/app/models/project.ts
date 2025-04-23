@@ -8,5 +8,6 @@ export interface Project {
   projectType: string
   imagePath?: any,
   projectLink: string
-  techStack?: any
+  techStack?: any,
+  role: string
 }

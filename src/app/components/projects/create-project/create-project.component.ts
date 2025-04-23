@@ -38,6 +38,7 @@ export class CreateProjectComponent implements OnInit {
       projectType: new FormControl(null, Validators.required),
       projectYear: new FormControl(null, Validators.required),
       projectLink: new FormControl(null, Validators.required),
+      role: new FormControl(null, Validators.required),
       id: new FormControl(null)
     });
 
@@ -54,6 +55,7 @@ export class CreateProjectComponent implements OnInit {
             this.form.get('id')?.patchValue(x._id)
             this.form.get('projectType')?.patchValue(x.projectType)
             this.form.get('projectLink')?.patchValue(x.projectLink)
+            this.form.get('role')?.patchValue(x.role)
 
             this.stackService.getstack();
             this.stackSubscription = this.stackService
@@ -85,7 +87,6 @@ export class CreateProjectComponent implements OnInit {
           .getstackStream()
           .subscribe((stack: Stack[]) => {
             this.stacks = stack;
-            console.log(this.stacks)
           });
 
       }
